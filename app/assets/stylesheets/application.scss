@@ -21,6 +21,9 @@ $secondary-color: color("yellow", "base") !default;
 .bold{
   font-weight: bold;
 }
+.underlined{
+  text-decoration: underline;
+}
 a{
   color: black;
   &:hover{

@@ -4,6 +4,7 @@ class UserViewController < ApplicationController
     @subreddits = Subreddit.all
     @users = User.all
     @posts = Post.all
+    @comments = Comment.all
   end
 
 end
