@@ -1,0 +1,33 @@
+<div class="center">
+  <% if params[:r].nil? || params[:r].empty? %>
+  <h2 class="bold">Subreddits</h2>
+  <%
+
+    @subreddits.each do |subreddit|
+
+      sub_creator = @users.find(subreddit.user_id).username
+
+      sub_creator_id = @users.find(subreddit.user_id).id.to_s
+
+      concat "<h5><a href=\"?r=#{subreddit.name}\">#{subreddit.name}</a></h5>".html_safe
+
+      concat "<h6 class=\"bold\"><a href=\"users?u=#{sub_creator}\">#{sub_creator}</a></h6><br>".html_safe
+
+    end
+  %>
+
+  <% elsif @subreddits.find_by name: params[:r] %>
+    <h2 class="bold"><%= params[:r] %></h2>
+    <% @posts.each do |post|
+        original_poster = @users.find(post.user_id).username
+        if post.subreddit_id == (@subreddits.find_by name: params[:r]).id
+          concat (post.content + "<br><a href=\"users?u=#{original_poster}\" class=\"bold\">#{original_poster}</a><br><br>").html_safe
+        end
+        end
+       %>
+
+  <% else %>
+  <h2 class="bold">Sub not found.</h2>
+  <% end  %>
+
+</div>
