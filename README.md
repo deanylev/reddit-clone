@@ -1,5 +1,7 @@
 # Reddit Clone
 
+## NOTE THIS DOES NOT WORK ON WINDOWS AS OF NOW
+
 To setup:
 
 **1.** Setup Ruby
