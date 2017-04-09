@@ -15,7 +15,7 @@
      @comments.each do |comment|
         comment_poster = (@users.find_by id: comment.user_id).username
         if comment.post_id.to_s == params[:post]
-          concat "#{comment.content}<br><a href=\"users?u=#{comment_poster}\" class=\"bold\">#{comment_poster}</a>".html_safe
+          concat "#{comment.content}<br><a href=\"users?u=#{comment_poster}\" class=\"bold\">#{comment_poster}</a><br><br>".html_safe
         end
       end
      %>

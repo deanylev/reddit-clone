@@ -34,7 +34,7 @@
           concat (post.content + "<br><a href=\"users?u=#{original_poster}\" class=\"bold\">#{original_poster}</a>").html_safe
           numberOfComments = 0
           @comments.each do |comment|
-            if comment.post_id = post.id
+            if comment.post_id == post.id
               numberOfComments += 1
             end
           end

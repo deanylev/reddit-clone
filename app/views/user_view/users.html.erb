@@ -22,7 +22,7 @@
     <% @posts.each do |post|
         numberOfComments = 0
         @comments.each do |comment|
-          if comment.post_id = post.id
+          if comment.post_id == post.id
             numberOfComments += 1
           end
         end
@@ -37,7 +37,7 @@
 
         @comments.each do |comment|
           if comment.user_id = (@users.find_by username: params[:u]).id
-            concat "#{comment.content}<br><a href=\"comments?post=#{comment.post_id}\" class=\"bold\">Link to post</a><br>".html_safe
+            concat "#{comment.content}<br><a href=\"comments?post=#{comment.post_id}\" class=\"bold\">Link to post</a><br><br>".html_safe
           end
         end
 
