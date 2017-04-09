@@ -2,13 +2,13 @@
 
 To setup:
 
-1. Setup Ruby and Download the Rails Gem
+**1.** Setup Ruby and Download the Rails Gem
 
-2. Clone the repo
+**2.** Clone the repo
 
-3. In the folder, run `bundle install`, then `rails server`
+**3.** In the folder, run `bundle install`, then `rails server`
 
-4. Open it in your web browser (by default this is at `localhost:3000`)
+**4.** Open it in your web browser (by default this is at `localhost:3000`)
 
 * To add users go to /users
 
