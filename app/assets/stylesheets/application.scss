@@ -30,3 +30,12 @@ a{
     text-decoration: underline;
   }
 }
+.homepage-selector{
+  background-color: black;
+  color: white;
+  border: black 2.5px solid;
+  &:hover{
+    background-color: white;
+    color: black;
+  }
+}
