@@ -6,6 +6,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <% unless params[:highlight].nil? || params[:highlight].empty? %>
+    <style><%= "#comment#{params[:highlight]}{background-color:#ffab40}" %></style>
+    <% end %>
   </head>
 
   <body>
