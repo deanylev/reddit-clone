@@ -1,24 +1,23 @@
-# README
+# Reddit Clone
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To setup:
 
-Things you may want to cover:
+1. Setup Ruby and Download the Rails Gem
 
-* Ruby version
+2. Clone the repo
 
-* System dependencies
+3. In the folder, run `bundle install`, then `rails server`
 
-* Configuration
+4. Open it in your web browser (by default this is at `localhost:3000`)
 
-* Database creation
+* To add users go to /users
 
-* Database initialization
+* To add subreddits go to /subreddits
 
-* How to run the test suite
+* To add posts go to /posts
 
-* Services (job queues, cache servers, search engines, etc.)
+* To add comments go to /comments
 
-* Deployment instructions
+### The above will change eventually to a proper system, right now it's just the default system that's generated when you create Rails scaffolding
 
-* ...
+### The proper intended front-end view is at /view (eg. view subreddits at /view/subreddits, etc.)
