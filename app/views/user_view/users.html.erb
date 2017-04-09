@@ -18,6 +18,7 @@
 
   <% elsif @users.find_by username: params[:u] %>
     <h2 class="bold"><%= params[:u] %></h2>
+    <h5 class="bold">Posts:</h5><br>
     <% @posts.each do |post|
         numberOfComments = 0
         @comments.each do |comment|
@@ -30,6 +31,16 @@
           concat "#{post.content}<br><span class=\"bold\">subreddit: <a href=\"subreddits?r=#{posted_subreddit}\">#{posted_subreddit}</a></span><br><a href=\"comments?post=#{post.id}\" class=\"bold underlined\">comments #{numberOfComments}</a><br><br><br>".html_safe
         end
         end
+       %>
+       <h5 class="bold">Comments:</h5><br>
+       <%
+
+        @comments.each do |comment|
+          if comment.user_id = (@users.find_by username: params[:u]).id
+            concat "#{comment.content}<br><a href=\"comments?post=#{comment.post_id}\" class=\"bold\">Link to post</a><br>".html_safe
+          end
+        end
+
        %>
 
   <% else %>

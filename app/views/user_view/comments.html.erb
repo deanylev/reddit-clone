@@ -1,0 +1,27 @@
+<div class="center">
+  <% if params[:post].nil? || params[:post].empty? %>
+  <h2 class="bold">Post not found.</h2>
+
+  <% elsif @posts.find_by id: params[:post] %>
+    <h2 class="bold">Post:</h2>
+
+    <%= (@posts.find_by id: params[:post]).content
+
+       %>
+
+     <br><br><br><h5 class="bold">Comments:</h5><br>
+
+     <%
+     @comments.each do |comment|
+        comment_poster = (@users.find_by id: comment.user_id).username
+        if comment.post_id.to_s == params[:post]
+          concat "#{comment.content}<br><a href=\"users?u=#{comment_poster}\" class=\"bold\">#{comment_poster}</a>".html_safe
+        end
+      end
+     %>
+
+  <% else %>
+  <h2 class="bold">Post not found.</h2>
+  <% end  %>
+
+</div>
