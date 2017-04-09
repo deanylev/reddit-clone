@@ -6,7 +6,9 @@
 
   <% elsif @posts.find_by id: params[:post]
      @title = "Comments" %>
-    <h2 class="bold"><%= "#{(@subreddits.find_by id: (@posts.find_by id: params[:post]).subreddit_id).name}:" %></h2>
+    <h2 class="bold"><%= (@subreddits.find_by id: (@posts.find_by id: params[:post]).subreddit_id).name %></h2>
+
+    <h5 class="bold">Post:</h5><br>
 
     <%= (@posts.find_by id: params[:post]).content %>
 
