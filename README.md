@@ -2,7 +2,7 @@
 
 To setup:
 
-**1.** Setup Ruby and Download the Rails Gem
+**1.** Setup Ruby
 
 **2.** Clone the repo
 
