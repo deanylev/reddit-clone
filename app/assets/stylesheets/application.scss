@@ -25,17 +25,17 @@ $secondary-color: color("yellow", "base") !default;
   text-decoration: underline;
 }
 a{
-  color: black;
+  color: #333333;
   &:hover{
     text-decoration: underline;
   }
 }
 .homepage-selector{
-  background-color: black;
+  background-color: #333333;
   color: white;
-  border: black 2.5px solid;
+  border: #333333 2.5px solid;
   &:hover{
     background-color: white;
-    color: black;
+    color: #333333;
   }
 }
