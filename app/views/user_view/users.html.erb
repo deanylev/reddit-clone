@@ -48,7 +48,7 @@
        <%
 
         @comments.each do |comment|
-          if comment.user_id = (@users.find_by username: params[:u]).id
+          if comment.user_id == (@users.find_by username: params[:u]).id
             posted_subreddit = (@subreddits.find_by id: (@posts.find_by id: comment.post_id).subreddit_id).name
             concat "<span><a href=\"comments?post=#{comment.post_id}&highlight=#{comment.id}#comment#{comment.id}\">#{comment.content}</a><br><span class=\"bold\">in <a href=\"subreddits?r=#{posted_subreddit}\">#{posted_subreddit}</a></span></span><br><br>".html_safe
           end
