@@ -2,7 +2,7 @@
   <% if params[:u].nil? || params[:u].empty? %>
   <h2 class="bold">Users</h2>
   <%
-
+    @title = "Users"
     @users.each do |user|
 
       concat "<h5><a href=\"?u=#{user.username}\">#{user.username}</a></h5><span class=\"bold\">Created:</span><br>".html_safe
@@ -16,7 +16,9 @@
     end
   %>
 
-  <% elsif @users.find_by username: params[:u] %>
+  <% elsif @users.find_by username: params[:u]
+     @title = params[:u]
+  %>
     <h2 class="bold"><%= params[:u] %></h2>
     <h5 class="bold">Posts:</h5><br>
     <% @posts.each do |post|
@@ -43,7 +45,9 @@
 
        %>
 
-  <% else %>
+  <% else
+     @title = "User not found"
+  %>
   <h2 class="bold">User not found.</h2>
   <% end  %>
 

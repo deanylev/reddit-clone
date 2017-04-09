@@ -1,5 +1,7 @@
 <div class="center">
-  <% if params[:post].nil? || params[:post].empty? %>
+  <% if params[:post].nil? || params[:post].empty?
+     @title = "Comments"
+  %>
   <h2 class="bold">Post not found.</h2>
 
   <% elsif @posts.find_by id: params[:post] %>
@@ -20,7 +22,9 @@
       end
      %>
 
-  <% else %>
+  <% else
+     @title = "Post not found"
+  %>
   <h2 class="bold">Post not found.</h2>
   <% end  %>
 

@@ -2,7 +2,7 @@
   <% if params[:r].nil? || params[:r].empty? %>
   <h2 class="bold">Subreddits</h2>
   <%
-
+    @title = "Subreddits"
     @subreddits.each do |subreddit|
 
       sub_creator = @users.find(subreddit.user_id).username
@@ -26,7 +26,9 @@
     end
   %>
 
-  <% elsif @subreddits.find_by name: params[:r] %>
+  <% elsif @subreddits.find_by name: params[:r]
+     @title = params[:r]
+  %>
     <h2 class="bold"><%= params[:r] %></h2>
     <% @posts.each do |post|
         original_poster = @users.find(post.user_id).username
@@ -43,7 +45,9 @@
         end
        %>
 
-  <% else %>
+  <% else
+  @title = "Sub not found"
+  %>
   <h2 class="bold">Sub not found.</h2>
   <% end  %>
 
