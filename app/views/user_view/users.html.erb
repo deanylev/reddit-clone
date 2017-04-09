@@ -4,12 +4,22 @@
   <%
     @title = "Users"
     @users.each do |user|
-
-      concat "<h5><a href=\"?u=#{user.username}\">#{user.username}</a></h5><span class=\"bold\">Created:</span><br>".html_safe
+      numberofSubreddits = 0
+      @subreddits.each do |subreddit|
+        if subreddit.user_id == user.id
+          numberofSubreddits += 1
+        end
+      end
+      subsOrNot = ""
+      if numberofSubreddits > 1
+        subsOrNot = "Created:"
+      end
+      concat "<h5><a href=\"?u=#{user.username}\">#{user.username}</a></h5><span class=\"bold\">#{subsOrNot}</span><br>".html_safe
 
       @subreddits.each do |subreddit|
         if subreddit.user_id == user.id
           concat "<a href=\"subreddits?r=#{subreddit.name}\">#{subreddit.name}</a><br>".html_safe
+          numberofSubreddits += 1
         end
       end
 
