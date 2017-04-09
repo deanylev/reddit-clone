@@ -1,15 +1,14 @@
 <div class="center">
   <% if params[:post].nil? || params[:post].empty?
-     @title = "Comments"
+     @title = "Post not found"
   %>
   <h2 class="bold">Post not found.</h2>
 
-  <% elsif @posts.find_by id: params[:post] %>
+  <% elsif @posts.find_by id: params[:post]
+     @title = "Comments" %>
     <h2 class="bold">Post:</h2>
 
-    <%= (@posts.find_by id: params[:post]).content
-
-       %>
+    <%= (@posts.find_by id: params[:post]).content %>
 
      <br><br><br><h5 class="bold">Comments:</h5><br>
 
