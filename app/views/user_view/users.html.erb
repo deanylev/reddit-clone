@@ -26,7 +26,8 @@
           end
         end
         if post.user_id == (@users.find_by username: params[:u]).id
-          concat "#{post.content}<br><a href=\"comments?post=#{post.id}\" class=\"bold underlined\">comments #{numberOfComments}</a><br><br><br>".html_safe
+          posted_subreddit = (@subreddits.find_by id: post.subreddit_id).name
+          concat "#{post.content}<br><span class=\"bold\">subreddit: <a href=\"subreddits?r=#{posted_subreddit}\">#{posted_subreddit}</a></span><br><a href=\"comments?post=#{post.id}\" class=\"bold underlined\">comments #{numberOfComments}</a><br><br><br>".html_safe
         end
         end
        %>
