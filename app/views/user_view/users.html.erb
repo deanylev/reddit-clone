@@ -1,0 +1,38 @@
+<div class="center">
+  <% if params[:u].nil? || params[:u].empty? %>
+  <h2 class="bold">Users</h2>
+  <%
+
+    @users.each do |user|
+
+      concat "<h5><a href=\"?u=#{user.username}\">#{user.username}</a></h5><span class=\"bold\">Created:</span><br>".html_safe
+
+      @subreddits.each do |subreddit|
+        if subreddit.user_id == user.id
+          concat "<a href=\"subreddits?r=#{subreddit.name}\">#{subreddit.name}</a><br>".html_safe
+        end
+      end
+
+    end
+  %>
+
+  <% elsif @users.find_by username: params[:u] %>
+    <h2 class="bold"><%= params[:u] %></h2>
+    <% @posts.each do |post|
+        numberOfComments = 0
+        @comments.each do |comment|
+          if comment.post_id = post.id
+            numberOfComments += 1
+          end
+        end
+        if post.user_id == (@users.find_by username: params[:u]).id
+          concat "#{post.content}<br><a href=\"comments?post=#{post.id}\" class=\"bold underlined\">comments #{numberOfComments}</a><br><br><br>".html_safe
+        end
+        end
+       %>
+
+  <% else %>
+  <h2 class="bold">User not found.</h2>
+  <% end  %>
+
+</div>
