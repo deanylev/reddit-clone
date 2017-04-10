@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require material_icons
  */
 @import "materialize/components/color";
 $primary-color: color("blue", "lighten-2") !default;
@@ -37,5 +38,10 @@ a{
   &:hover{
     background-color: white;
     color: #333333;
+  }
+  &:active{
+    background-color: #efefef;
+    color: #333333;
+    text-decoration: underline;
   }
 }

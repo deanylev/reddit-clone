@@ -12,6 +12,12 @@
   </head>
 
   <body>
+    <ul id="slide-out" class="side-nav">
+      <br>
+      <li<% concat " class=\"active\"".html_safe unless @subreddits_active.nil?%>><a href="subreddits">Subreddits</a></li>
+      <li<% concat " class=\"active\"".html_safe unless @users_active.nil?%>><a href="users">Users</a></li>
+    </ul>
+    <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse show-on-large"><br><i class="material-icons small" style="padding-left:20px;">menu</i></a>
     <%= yield %>
   </body>
 </html>
