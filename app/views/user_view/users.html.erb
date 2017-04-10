@@ -12,7 +12,7 @@
         end
       end
       subsOrNot = ""
-      if numberofSubreddits >= 1
+      if numberofSubreddits > 0
         subsOrNot = "Created:"
       end
       concat "<h5><a href=\"?u=#{user.username}\">#{user.username}</a></h5><span class=\"bold\">#{subsOrNot}</span><br>".html_safe
