@@ -29,8 +29,10 @@
 
   <% elsif @subreddits.find_by name: params[:r]
      @title = params[:r]
+     sub_creator = (@users.find_by id: (@subreddits.find_by name: params[:r]).user_id).username
   %>
     <h2 class="bold"><%= params[:r] %></h2>
+    <h5>Created by <a href="users?u=<%= sub_creator %>"><%= sub_creator %></a></h5><br>
     <% @posts.each do |post|
         original_poster = @users.find(post.user_id).username
         if post.subreddit_id == (@subreddits.find_by name: params[:r]).id
