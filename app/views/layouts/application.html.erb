@@ -7,11 +7,11 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <% unless params[:highlight].nil? || params[:highlight].empty? %>
-    <style><%= "#comment#{params[:highlight]}{background-color:#ffab40 !important}" %></style>
     <% end %>
   </head>
 
   <body>
+    <style><%= "#comment#{params[:highlight]}{background-color:#ffab40 !important}" %></style>
     <ul id="slide-out" class="side-nav">
       <br>
       <li<% concat " class=\"active\"".html_safe unless @subreddits_active.nil?%>><a href="subreddits">Subreddits</a></li>
