@@ -31,6 +31,13 @@
      @title = params[:u]
   %>
     <h2 class="bold"><%= params[:u] %></h2>
+    <h5 class="bold">Subreddits:</h5><br>
+    <% @subreddits.each do |subreddit|
+        if subreddit.user_id == (@users.find_by username: params[:u]).id
+          concat "<a href=\"subreddits?r=#{subreddit.name}\">#{subreddit.name}</a><br>".html_safe
+        end
+       end
+    %>
     <h5 class="bold">Posts:</h5><br>
     <% @posts.each do |post|
         numberOfComments = 0

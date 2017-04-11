@@ -17,6 +17,7 @@
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
 //= require_tree .
-$(document).ready(function(){
-  $(".button-collapse").sideNav();
+$(document).on('turbolinks:load', function() {
+  Waves.displayEffect();
+ $(".button-collapse").sideNav();
 });
