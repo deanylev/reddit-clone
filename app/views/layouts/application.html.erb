@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <% unless params[:highlight].nil? || params[:highlight].empty? %>
-    <style><%= "#comment#{params[:highlight]}{background-color:#ffab40}" %></style>
+    <style><%= "#comment#{params[:highlight]}{background-color:#ffab40 !important}" %></style>
     <% end %>
   </head>
 
@@ -17,7 +17,7 @@
       <li<% concat " class=\"active\"".html_safe unless @subreddits_active.nil?%>><a href="subreddits">Subreddits</a></li>
       <li<% concat " class=\"active\"".html_safe unless @users_active.nil?%>><a href="users">Users</a></li>
     </ul>
-    <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse show-on-large"><br><i class="material-icons small" style="padding-left:20px;">menu</i></a>
+    <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse show-on-large black-text"><br><i class="material-icons small" style="padding-left:20px;">menu</i></a>
     <%= yield %>
   </body>
 </html>

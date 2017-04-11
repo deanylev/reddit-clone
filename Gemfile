@@ -38,8 +38,11 @@ gem 'materialize-sass'
 # Material Icons
 gem 'material_icons'
 
-#jQuery Turbolinks Fix
+# jQuery Turbolinks Fix
 gem 'jquery-turbolinks'
+
+# Rewrite URLs
+gem 'rack-rewrite'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

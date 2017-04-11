@@ -1,32 +1,36 @@
-<div class="center">
-  <% if params[:post].nil? || params[:post].empty?
-     @title = "Post not found"
-  %>
-  <h2 class="bold">Post not found.</h2>
-
-  <% elsif @posts.find_by id: params[:post]
-     @title = "Comments" %>
-    <h2 class="bold"><%= (@subreddits.find_by id: (@posts.find_by id: params[:post]).subreddit_id).name %></h2>
-
-    <h5 class="bold">Post:</h5><br>
-
-    <%= (@posts.find_by id: params[:post]).content %>
-
-     <br><br><br><h5 class="bold">Comments:</h5><br>
-
-     <%
-     @comments.each do |comment|
-        comment_poster = (@users.find_by id: comment.user_id).username
-        if comment.post_id.to_s == params[:post]
-          concat "<div id=\"comment#{comment.id}\">#{comment.content}<br><a href=\"users?u=#{comment_poster}\" class=\"bold\">#{comment_poster}</a></div><br><br>".html_safe
-        end
-      end
-     %>
-
-  <% else
-     @title = "Post not found"
-  %>
-  <h2 class="bold">Post not found.</h2>
-  <% end  %>
-
+<div class="center container">
+   <% if params[:post].nil? || params[:post].empty?
+      @title = "Post not found"
+      %>
+   <h2 class="bold">Post not found.</h2>
+   <% elsif @posts.find_by id: params[:post]
+      @title = "Comments" %>
+   <h2 class="bold"><%= (@subreddits.find_by id: (@posts.find_by id: params[:post]).subreddit_id).name %></h2>
+   <div class="card blue-grey white-text">
+      <div class="card-content">
+         <span class="card-title">Post</span>
+         <%= (@posts.find_by id: params[:post]).content %>
+      </div>
+   </div>
+   <br>
+   <ul class="collection with-header blue-grey">
+      <li class="collection-header blue-grey white-text">
+         <h5>Comments</h5>
+      </li>
+      <%
+         @comments.each do |comment|
+            comment_poster = (@users.find_by id: comment.user_id).username
+            if comment.post_id.to_s == params[:post] %>
+      <li class="collection-item blue-grey white-text" id="comment<%= comment.id %>"><%= comment.content %><br><a href="users?u=<%= comment_poster %>" class="bold"><%= comment_poster %></a> <% if comment.user_id == (@posts.find_by id: params[:post]).user_id %><span class="bold" title="Original Poster">[OP]</span> <% end %></li>
+      <%
+         end
+         end
+         %>
+   </ul>
+   <% else
+      @title = "Post not found"
+      %>
+   <h2 class="bold">Post not found.</h2>
+   <a href="javascript:void(0)" onclick="window.history.back();" class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <% end  %>
 </div>

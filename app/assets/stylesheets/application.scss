@@ -15,10 +15,11 @@
  *= require material_icons
  */
 @import "materialize/components/color";
-$primary-color: color("blue", "lighten-2") !default;
-$secondary-color: color("yellow", "base") !default;
+$primary-color: color("blue-grey", "base") !default;
+$secondary-color: $primary-color;
 @import "materialize";
 @import "materialize/extras/nouislider";
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 .bold{
   font-weight: bold;
 }
@@ -26,13 +27,14 @@ $secondary-color: color("yellow", "base") !default;
   text-decoration: underline;
 }
 a{
-  color: #333333;
+  color: #fff;
+  text-decoration: underline;
   &:hover{
-    text-decoration: underline;
+    text-decoration:none;
   }
 }
 .homepage-selector{
-  background-color: #333333;
+  background-color: $primary-color;
   color: white;
   border: #333333 2.5px solid;
   &:hover{
@@ -44,4 +46,16 @@ a{
     color: #333333;
     text-decoration: underline;
   }
+}
+.homepage-selector-anchor{
+  text-decoration: none !important;
+}
+body{
+  font-family: 'Roboto';
+}
+.card-title{
+  font-weight: bold !important;
+}
+.collection-header > h5{
+  font-weight: bold !important;
 }

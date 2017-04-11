@@ -1,73 +1,90 @@
 <% @users_active = true %>
-<div class="center">
-  <% if params[:u].nil? || params[:u].empty? %>
-  <h2 class="bold">Users</h2>
-  <%
-    @title = "Users"
-    @users.each do |user|
-      numberofSubreddits = 0
-      @subreddits.each do |subreddit|
-        if subreddit.user_id == user.id
-          numberofSubreddits += 1
-        end
-      end
-      subsOrNot = ""
-      if numberofSubreddits > 0
-        subsOrNot = "Created:"
-      end
-      concat "<h5><a href=\"?u=#{user.username}\">#{user.username}</a></h5><span class=\"bold\">#{subsOrNot}</span><br>".html_safe
-
-      @subreddits.each do |subreddit|
-        if subreddit.user_id == user.id
-          concat "<a href=\"subreddits?r=#{subreddit.name}\">#{subreddit.name}</a><br>".html_safe
-          numberofSubreddits += 1
-        end
-      end
-
-    end
-  %>
-
-  <% elsif @users.find_by username: params[:u]
-     @title = params[:u]
-  %>
-    <h2 class="bold"><%= params[:u] %></h2>
-    <h5 class="bold">Subreddits:</h5><br>
-    <% @subreddits.each do |subreddit|
-        if subreddit.user_id == (@users.find_by username: params[:u]).id
-          concat "<a href=\"subreddits?r=#{subreddit.name}\">#{subreddit.name}</a><br>".html_safe
-        end
-       end
-    %>
-    <h5 class="bold">Posts:</h5><br>
-    <% @posts.each do |post|
-        numberOfComments = 0
-        @comments.each do |comment|
-          if comment.post_id == post.id
-            numberOfComments += 1
+<div class="center container">
+   <% if params[:u].nil? || params[:u].empty? %>
+   <h2 class="bold">Users</h2>
+   <%
+      @title = "Users"
+      @users.each do |user|
+        numberofSubreddits = 0
+        @subreddits.each do |subreddit|
+          if subreddit.user_id == user.id
+            numberofSubreddits += 1
           end
-        end
-        if post.user_id == (@users.find_by username: params[:u]).id
-          posted_subreddit = (@subreddits.find_by id: post.subreddit_id).name
-          concat "#{post.content}<br><span class=\"bold\">in <a href=\"subreddits?r=#{posted_subreddit}\">#{posted_subreddit}</a></span><br><a href=\"comments?post=#{post.id}\" class=\"bold underlined\">comments #{numberOfComments}</a><br><br><br>".html_safe
-        end
-        end
-       %>
-       <h5 class="bold">Comments:</h5><br>
-       <%
+        end %>
+   <div class="card blue-grey">
+      <div class="card-content"><span class="card-title"><a href="?u=<%= user.username%>"><%= user.username %></a></span><% if numberofSubreddits > 0 %><br><% end %><span class="bold white-text"><% if numberofSubreddits > 0 %>Created:<br><br><% end %></span>
+         <%
+            @subreddits.each do |subreddit|
+              if subreddit.user_id == user.id
+                %>
+         <a href="subreddits?r=<%= subreddit.name %>"><%= subreddit.name %></a><br>
+         <%
+            numberofSubreddits += 1
+            end
+            end
+            %>
+      </div>
+   </div>
+   <%
+      end
+      %>
+   <% elsif @users.find_by username: params[:u]
+      @title = params[:u]
+      %>
+   <h2 class="bold"><%= params[:u] %></h2>
+   <ul class="collection with-header blue-grey">
+      <li class="collection-header blue-grey white-text">
+         <h5>Subreddits</h5>
+      </li>
+      <% @subreddits.each do |subreddit|
+         if subreddit.user_id == (@users.find_by username: params[:u]).id %>
+      <li class="collection-item blue-grey white-text"><a href="subreddits?r=<%= subreddit.name %>"><%= subreddit.name %></a></li>
+      <%
+         end
+         end
+         %>
+   </ul>
+   <br>
+   <ul class="collection with-header blue-grey">
+      <li class="collection-header blue-grey white-text">
+         <h5>Posts</h5>
+      </li>
+      <% @posts.each do |post|
+         numberOfComments = 0
+         @comments.each do |comment|
+           if comment.post_id == post.id
+             numberOfComments += 1
+           end
+         end
+         if post.user_id == (@users.find_by username: params[:u]).id
+           posted_subreddit = (@subreddits.find_by id: post.subreddit_id).name
+           %>
+      <li class="collection-item blue-grey white-text"><span><%= post.content %><br><span class="bold">in <a href="subreddits?r=<%= posted_subreddit %>"><%= posted_subreddit %></a></span><br><a href="comments?post=<%= post.id %>" class="bold">comments <%= numberOfComments %></a></span></li>
+      <%
+         end
+         end
+         %>
+   </ul>
+   <br>
+   <ul class="collection with-header blue-grey">
+      <li class="collection-header blue-grey white-text">
+         <h5>Comments</h5>
+      </li>
+      <%
+         @comments.each do |comment|
+           if comment.user_id == (@users.find_by username: params[:u]).id
+             posted_subreddit = (@subreddits.find_by id: (@posts.find_by id: comment.post_id).subreddit_id).name %>
+      <li class="collection-item blue-grey white-text"><a href="comments?post=<%= comment.post_id %>&amp;highlight=<%= comment.id %>#comment<%= comment.id %>"><%= comment.content %></a><br><span class="bold">in <a href="subreddits?r=<%= posted_subreddit %>"><%= posted_subreddit %></a></span></li>
+      <%
+         end
+         end
 
-        @comments.each do |comment|
-          if comment.user_id == (@users.find_by username: params[:u]).id
-            posted_subreddit = (@subreddits.find_by id: (@posts.find_by id: comment.post_id).subreddit_id).name
-            concat "<span><a href=\"comments?post=#{comment.post_id}&highlight=#{comment.id}#comment#{comment.id}\">#{comment.content}</a><br><span class=\"bold\">in <a href=\"subreddits?r=#{posted_subreddit}\">#{posted_subreddit}</a></span></span><br><br>".html_safe
-          end
-        end
-
-       %>
-
-  <% else
-     @title = "User not found"
-  %>
-  <h2 class="bold">User not found.</h2>
-  <% end  %>
-
+         %>
+   </ul>
+   <% else
+      @title = "User not found"
+      %>
+   <h2 class="bold">User not found.</h2>
+   <a href="users" class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <% end  %>
 </div>

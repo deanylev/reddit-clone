@@ -89,6 +89,7 @@ GEM
       mini_portile2 (~> 2.1.0)
     puma (3.8.2)
     rack (2.0.1)
+    rack-rewrite (1.5.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (5.0.2)
@@ -170,6 +171,7 @@ DEPENDENCIES
   material_icons
   materialize-sass
   puma (~> 3.0)
+  rack-rewrite
   rails (~> 5.0.2)
   sass-rails (~> 5.0)
   spring

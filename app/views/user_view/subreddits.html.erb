@@ -1,57 +1,74 @@
 <% @subreddits_active = true %>
-<div class="center">
-  <% if params[:r].nil? || params[:r].empty? %>
-  <h2 class="bold">Subreddits</h2>
-  <%
-    @title = "Subreddits"
-    @subreddits.each do |subreddit|
+<div class="center container">
+   <% if params[:r].nil? || params[:r].empty?
+      @title = "Subreddits" %>
+   <h2 class="bold"><%= @title %></h2>
+   <%
+      @subreddits.each do |subreddit|
 
-      sub_creator = @users.find(subreddit.user_id).username
+        sub_creator = @users.find(subreddit.user_id).username
 
-      sub_creator_id = @users.find(subreddit.user_id).id.to_s
+        sub_creator_id = @users.find(subreddit.user_id).id.to_s
 
-      numberOfPosts = 0
+        numberOfPosts = 0
 
-      @posts.each do |post|
+        @posts.each do |post|
 
-        if post.subreddit_id == subreddit.id
-          numberOfPosts += 1
-        end
-
-      end
-
-      concat "<h5><a href=\"?r=#{subreddit.name}\">#{subreddit.name}</a> - <span class=\"bold\">#{numberOfPosts} Posts</span></h5>".html_safe
-
-      concat "<h6 class=\"bold\"><a href=\"users?u=#{sub_creator}\">#{sub_creator}</a></h6><br>".html_safe
-
-    end
-  %>
-
-  <% elsif @subreddits.find_by name: params[:r]
-     @title = params[:r]
-     sub_creator = (@users.find_by id: (@subreddits.find_by name: params[:r]).user_id).username
-  %>
-    <h2 class="bold"><%= params[:r] %></h2>
-    <h5>Created by <a href="users?u=<%= sub_creator %>"><%= sub_creator %></a></h5><br>
-    <% @posts.each do |post|
-        original_poster = @users.find(post.user_id).username
-        if post.subreddit_id == (@subreddits.find_by name: params[:r]).id
-          concat (post.content + "<br><a href=\"users?u=#{original_poster}\" class=\"bold\">#{original_poster}</a>").html_safe
-          numberOfComments = 0
-          @comments.each do |comment|
-            if comment.post_id == post.id
-              numberOfComments += 1
-            end
+          if post.subreddit_id == subreddit.id
+            numberOfPosts += 1
           end
-          concat "<br><a href=\"comments?post=#{post.id}\" class=\"bold underlined\">comments #{numberOfComments}</a><br><br><br>".html_safe
         end
-        end
-       %>
-
-  <% else
-  @title = "Sub not found"
-  %>
-  <h2 class="bold">Sub not found.</h2>
-  <% end  %>
-
+        numberOfPosts == 1 ? postOrPosts = "Post" : postOrPosts = "Posts"
+        %>
+   <div class="card blue-grey">
+      <div class="card-content white-text">
+         <span class="card-title">
+         <a href="?r=<%= subreddit.name %>"><%= subreddit.name %></a>
+         </span><br>
+         <a href="users?u=<%= sub_creator %>"><%= sub_creator %></a>
+         <br><br>
+         <div class="divider"></div>
+         <br>
+         <span class="bold"><%= numberOfPosts %> <%= postOrPosts %></span>
+         <br>
+      </div>
+   </div>
+   <%
+      end
+      %>
+   <% elsif @subreddits.find_by name: params[:r]
+      @title = params[:r]
+      sub_creator = (@users.find_by id: (@subreddits.find_by name: params[:r]).user_id).username
+      %>
+   <h2 class="bold"><%= params[:r] %></h2>
+   <h5>Created by <a href="users?u=<%= sub_creator %>" class="black-text"><%= sub_creator %></a></h5>
+   <br>
+   <% @posts.each do |post|
+      original_poster = @users.find(post.user_id).username
+      if post.subreddit_id == (@subreddits.find_by name: params[:r]).id %>
+   <div class="card blue-grey">
+      <div class="card-content white-text">
+        <span class="card-title"><%= post.content %></span><br><a href="users?u=<%= original_poster %>" class="bold"><%= original_poster %></a><% if post.user_id == (@subreddits.find_by name: params[:r]).user_id %><span class="bold" title="Subreddit Owner"> [O]</span> <% end %>
+        <br><br><div class="divider"></div><br>
+         <%
+            numberOfComments = 0
+            @comments.each do |comment|
+              if comment.post_id == post.id
+                numberOfComments += 1
+              end
+            end %>
+         <a href="comments?post=<%= post.id %>" class="bold">comments <%= numberOfComments %></a>
+      </div>
+   </div>
+   <br>
+   <%
+      end
+      end
+      %>
+   <% else
+      @title = "Sub not found"
+      %>
+   <h2 class="bold">Sub not found.</h2><br>
+   <a href="subreddits" class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <% end  %>
 </div>
