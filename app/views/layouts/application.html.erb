@@ -12,10 +12,10 @@
 
   <body>
     <% unless params[:highlight].nil? || params[:highlight].empty? %><style>#comment<%= params[:highlight] %>{background-color:#ffab40 !important}#comment<%= params[:highlight] %>-exitbutton{display: block !important;}</style><% end %>
-    <ul id="slide-out" class="side-nav">
+    <ul id="slide-out" class="side-nav blue-grey">
       <br>
-      <li<% concat " class=\"active\"".html_safe unless @subreddits_active.nil?%>><a href="subreddits">Subreddits</a></li>
-      <li<% concat " class=\"active\"".html_safe unless @users_active.nil?%>><a href="users">Users</a></li>
+      <li<% concat " class=\"active\"".html_safe unless @subreddits_active.nil?%>><a href="subreddits" class="sidenav-link">Subreddits</a></li>
+      <li<% concat " class=\"active\"".html_safe unless @users_active.nil?%>><a href="users" class="sidenav-link">Users</a></li>
     </ul>
     <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse show-on-large black-text"><br><i class="material-icons small" style="padding-left:20px;">menu</i></a>
     <%= yield %>
