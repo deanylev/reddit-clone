@@ -1,0 +1,28 @@
+<%= form_for(post) do |f| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content, class: "white-text" %>
+    <%= f.text_area :content, class: "materialize-textarea" %>
+  </div>
+
+  <div class="field">
+    <%= f.number_field :user_id, type: "hidden", value: "2" %>
+  </div>
+
+  <div class="field">
+    <%= f.number_field :subreddit_id, type: "hidden", value: (@subreddits.find_by name: params[:subreddit]).id %>
+  </div>
+
+    <%= f.submit class: "btn black waves-effect waves-light" %>
+<% end %>

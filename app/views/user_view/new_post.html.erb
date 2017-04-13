@@ -1,0 +1,26 @@
+<% @subreddits_active = true %>
+<div class="center container">
+   <% if params[:subreddit].nil? || params[:subreddit].empty?
+      @title = "Subreddit not found"
+      %>
+   <h2 class="bold">Subreddit not found.</h2>
+   <a href="." class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <% elsif @subreddits.find_by name: params[:subreddit]
+      @title = "New Post"
+      subreddit = (@subreddits.find_by name: params[:subreddit]).name %>
+   <h2 class="bold">New Post to <a href=".?r=<%= subreddit %>" class="black-text"><%= subreddit %></a></h2>
+   <div class="card blue-grey white-text">
+      <div class="card-content">
+        <div class="row">
+          <%= render 'post_form', post: Post.new %>
+        </div>
+      </div>
+   </div>
+   <br>
+   <% else
+      @title = "Subreddit not found"
+      %>
+   <h2 class="bold">Subreddit not found.</h2>
+   <a href="." class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <% end  %>
+</div>
