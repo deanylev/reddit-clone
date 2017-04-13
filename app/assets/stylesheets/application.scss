@@ -15,7 +15,7 @@
  *= require material_icons
  */
 @import "materialize/components/color";
-$primary-color: color("blue-grey", "base") !default;
+$primary-color: color("grey", "lighten-2") !default;
 $secondary-color: $primary-color;
 @import "materialize";
 @import "materialize/extras/nouislider";

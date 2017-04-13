@@ -10,5 +10,6 @@ class UserViewController < ApplicationController
   alias subreddits functions
   alias users functions
   alias comments functions
+  alias new_post functions
 
 end
