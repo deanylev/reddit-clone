@@ -4,7 +4,7 @@
       @title = "Subreddit not found"
       %>
    <h2 class="bold">Subreddit not found.</h2>
-   <a href="." class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <a href="." class="btn btn-floating pulse blue-grey"><i class="material-icons">arrow_back</i></a>
    <% elsif @subreddits.find_by name: params[:subreddit]
       @title = "New Post"
       subreddit = (@subreddits.find_by name: params[:subreddit]).name %>
@@ -19,6 +19,6 @@
       @title = "Subreddit not found"
       %>
    <h2 class="bold">Subreddit not found.</h2>
-   <a href="." class="btn btn-floating pulse"><i class="material-icons">arrow_back</i></a>
+   <a href="." class="btn btn-floating pulse blue-grey"><i class="material-icons">arrow_back</i></a>
    <% end  %>
 </div>
