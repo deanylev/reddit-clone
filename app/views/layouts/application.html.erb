@@ -11,11 +11,17 @@
   </head>
 
   <body>
-    <% unless params[:highlight].nil? || params[:highlight].empty? %><style>#comment<%= params[:highlight] %>{background-color:#ffab40 !important}#comment<%= params[:highlight] %>-exitbutton{display: block !important;}</style><% end %>
+    <% unless params[:highlight].nil? || params[:highlight].empty? %><style><%= "#comment#{params[:highlight]}" %>{background-color:#ffab40 !important}<%= "#comment#{params[:highlight]}-exitbutton" %>{display: block !important;}</style><% end %>
     <ul id="slide-out" class="side-nav blue-grey">
       <br>
-      <li<% concat " class=\"active\"".html_safe unless @subreddits_active.nil?%>><a href="/view/subreddits" class="sidenav-link">Subreddits</a></li>
-      <li<% concat " class=\"active\"".html_safe unless @users_active.nil?%>><a href="/view/users" class="sidenav-link">Users</a></li>
+      <li class="<% concat "active" unless @home_active.nil?%>"><a href="/view" class="sidenav-link">Home</a></li>
+      <li class="<% concat "active" unless @subreddits_active.nil?%>"><a href="/view/subreddits" class="sidenav-link">Subreddits</a></li>
+      <li class="<% concat "active" unless @users_active.nil?%>"><a href="/view/users" class="sidenav-link">Users</a></li>
+      <br><br><br><br><br>
+      <li class="divider"></li>
+      <li><a href="javascript:void(0)" class="white-text">Login</a></li>
+      <li><a href="javascript:void(0)" class="white-text">Register</a></li>
+      <li class="divider"></li>
     </ul>
     <a href="javascript:void(0)" data-activates="slide-out" class="button-collapse show-on-large black-text"><br><i class="material-icons small" style="padding-left:20px;">menu</i></a>
     <%= yield %>

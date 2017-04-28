@@ -44,6 +44,9 @@ gem 'jquery-turbolinks'
 # Rewrite URLs
 gem 'rack-rewrite'
 
+# bcrypt for passwords
+gem 'bcrypt'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -11,9 +11,7 @@
    <h2 class="bold">New Post to <a href="../subreddits?r=<%= subreddit %>" class="black-text"><%= subreddit %></a></h2>
    <div class="card blue-grey white-text">
       <div class="card-content">
-        <div class="row">
           <%= render 'post_form', post: Post.new %>
-        </div>
       </div>
    </div>
    <br>
